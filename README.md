@@ -17,7 +17,7 @@ Commit cycles will happen on any of the following conditions:
 
 ## Dependency
 
-### Maven (still not available due to problems to publish it to central repo)
+### Maven
 ```xml
 <dependency>
     <groupId>com.hubrick.vertx</groupId>
