@@ -1,9 +1,0 @@
-{
-  "main": "com.hubrick.vertx.kafka.KafkaMessageConsumer",
-  "description":"Vert.x module for consuming data from Kafka queue.",
-  "licenses": ["The Apache Software License Version 2.0"],
-  "author": "Marcus Thiesen",
-  "keywords": ["vertx", "kafka"],
-  "homepage": "https://github.com/hubrick/vertx-kafka-consumer",
-  "worker": true
-}
