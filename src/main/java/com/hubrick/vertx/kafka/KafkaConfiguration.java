@@ -42,14 +42,14 @@ class KafkaConfiguration {
     private final long maxUncommitedOffsets;
     private final long ackTimeoutMinutes;
 
-    private KafkaConfiguration( final String groupId,
-                                final String kafkaTopic,
-                                final String vertxTopic,
-                                final String zookeeper,
-                                final int zookeeperTimeout,
-                                final int maxUnacknowledged,
-                                final long maxUncommittedOffset,
-                                final long ackTimeoutMinutes ) {
+    private KafkaConfiguration(final String groupId,
+                               final String kafkaTopic,
+                               final String vertxTopic,
+                               final String zookeeper,
+                               final int zookeeperTimeout,
+                               final int maxUnacknowledged,
+                               final long maxUncommittedOffset,
+                               final long ackTimeoutMinutes) {
         this.groupId = groupId;
         this.kafkaTopic = kafkaTopic;
         this.vertxAddress = vertxTopic;
@@ -60,22 +60,22 @@ class KafkaConfiguration {
         this.ackTimeoutMinutes = ackTimeoutMinutes;
     }
 
-    public static KafkaConfiguration create( final String groupId,
-                                             final String kafkaTopic,
-                                             final String vertxTopic,
-                                             final String zookeeper,
-                                             final int zookeeperTimeout,
-                                             final int maxUnacknowledged,
-                                             final long maxUncommittedOffsets,
-                                             final long ackTimeoutMinutes ) {
-        return new KafkaConfiguration( groupId,
-                                       kafkaTopic,
-                                       vertxTopic,
-                                       zookeeper,
-                                       zookeeperTimeout,
-                                       maxUnacknowledged,
-                                       maxUncommittedOffsets,
-                                       ackTimeoutMinutes );
+    public static KafkaConfiguration create(final String groupId,
+                                            final String kafkaTopic,
+                                            final String vertxTopic,
+                                            final String zookeeper,
+                                            final int zookeeperTimeout,
+                                            final int maxUnacknowledged,
+                                            final long maxUncommittedOffsets,
+                                            final long ackTimeoutMinutes) {
+        return new KafkaConfiguration(groupId,
+                kafkaTopic,
+                vertxTopic,
+                zookeeper,
+                zookeeperTimeout,
+                maxUnacknowledged,
+                maxUncommittedOffsets,
+                ackTimeoutMinutes);
     }
 
     public String getGroupId() {

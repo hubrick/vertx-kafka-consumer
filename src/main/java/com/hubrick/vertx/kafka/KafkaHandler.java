@@ -24,6 +24,6 @@ package com.hubrick.vertx.kafka;
 @FunctionalInterface
 interface KafkaHandler {
 
-    void handle( final String vertxAddress, final String message, final Runnable ack );
+    void handle(final String vertxAddress, final String message, final Runnable ack);
 
 }
