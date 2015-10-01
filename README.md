@@ -14,9 +14,11 @@ Commit cycles will happen on any of the following conditions:
 ## Compatibility
 - Java 8+
 - Vert.x 2.x.x
+- Vert.x 3.x.x
 
-## Dependency
+## Dependencies
 
+### Dependency Vert.x 2.x.x
 ### Maven
 ```xml
 <dependency>
@@ -32,6 +34,16 @@ Commit cycles will happen on any of the following conditions:
 {
     "includes": "com.hubrick.vertx~vertx-kafka-consumer~1.0.0",
 }
+```
+
+### Dependency Vert.x 3.x.x
+### Maven
+```xml
+<dependency>
+    <groupId>com.hubrick.vertx</groupId>
+    <artifactId>vertx-kafka-consumer</artifactId>
+    <version>2.0.0</version>
+</dependency>
 ```
 
 ## How to use
