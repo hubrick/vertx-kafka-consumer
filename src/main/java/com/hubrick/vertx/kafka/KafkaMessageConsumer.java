@@ -44,8 +44,9 @@ public class KafkaMessageConsumer extends AbstractVerticle {
                 getMandatoryStringConfig(KafkaConfiguration.KEY_ZOOKEEPER),
                 config.getInteger(KafkaConfiguration.KEY_ZOOKEPER_TIMEOUT_MS, DEFAULT_ZOOKEEPER_TIMEOUT_MS),
                 config.getInteger(KafkaConfiguration.KEY_MAX_UNACKNOWLEDGED, 100),
-                config.getLong(KafkaConfiguration.KEY_MAX_UNCOMMITTED_OFFSETS, (long) 1000),
-                config.getLong(KafkaConfiguration.KEY_ACK_TIMEOUT_MINUTES, (long) 10));
+                config.getLong(KafkaConfiguration.KEY_MAX_UNCOMMITTED_OFFSETS, 1000L),
+                config.getLong(KafkaConfiguration.KEY_ACK_TIMEOUT_MINUTES, 10L),
+                config.getLong(KafkaConfiguration.KEY_COMMIT_TIMEOUT_MS, 5 * 60 * 1000L));
 
         consumer = VertxKafkaConsumer.create(configuration, this::handler);
 

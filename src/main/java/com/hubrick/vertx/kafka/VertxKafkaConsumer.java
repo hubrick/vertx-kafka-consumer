@@ -64,6 +64,7 @@ class VertxKafkaConsumer {
     };
     private final AtomicLong lastCommittedOffset = new AtomicLong();
     private final AtomicLong currentPartition = new AtomicLong(-1);
+    private final AtomicLong lastCommitTime = new AtomicLong(System.currentTimeMillis());
 
     public VertxKafkaConsumer(ConsumerConnector connector, KafkaConfiguration configuration, KafkaHandler handler) {
         this.connector = connector;
@@ -135,15 +136,20 @@ class VertxKafkaConsumer {
 
             if (unacknowledgedOffsets.size() >= configuration.getMaxUnacknowledged()
                     || partititionChanged(partition)
-                    || tooManyUncommittedOffsets(offset)) {
+                    || tooManyUncommittedOffsets(offset)
+                    || commitTimeoutReached()) {
                 LOG.info("Got {} unacknowledged messages, waiting for ACKs in order to commit", unacknowledgedOffsets.size());
                 if (!waitForAcks(phase)) {
                     return;
                 }
-                LOG.info("Continuing message processing");
                 commitOffsetsIfAllAcknowledged(offset);
+                LOG.info("Continuing message processing");
             }
         }
+    }
+
+    private boolean commitTimeoutReached() {
+        return System.currentTimeMillis() - lastCommitTime.get() >= configuration.getCommitTimeoutMs();
     }
 
     private boolean partititionChanged(long partition) {
@@ -157,7 +163,7 @@ class VertxKafkaConsumer {
 
     private boolean waitForAcks(int phase) {
         try {
-            phaser.awaitAdvanceInterruptibly(phase, 10, TimeUnit.MINUTES);
+            phaser.awaitAdvanceInterruptibly(phase, configuration.getAckTimeoutMinutes(), TimeUnit.MINUTES);
             return true;
         } catch (InterruptedException e) {
             LOG.error("Interrupted while waiting for ACKs", e);
@@ -179,6 +185,7 @@ class VertxKafkaConsumer {
             LOG.info("Committing at offset {}", currentOffset);
             connector.commitOffsets();
             lastCommittedOffset.set(currentOffset);
+            lastCommitTime.set(System.currentTimeMillis());
         } else {
             LOG.warn("Can not commit because {} ACKs missing", unacknowledgedOffsets.size());
         }
