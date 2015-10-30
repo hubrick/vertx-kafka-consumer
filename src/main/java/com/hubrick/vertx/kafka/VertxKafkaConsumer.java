@@ -163,7 +163,7 @@ class VertxKafkaConsumer {
 
     private boolean waitForAcks(int phase) {
         try {
-            phaser.awaitAdvanceInterruptibly(phase, 10, TimeUnit.MINUTES);
+            phaser.awaitAdvanceInterruptibly(phase, configuration.getAckTimeoutMinutes(), TimeUnit.MINUTES);
             return true;
         } catch (InterruptedException e) {
             LOG.error("Interrupted while waiting for ACKs", e);
