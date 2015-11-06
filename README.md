@@ -42,7 +42,7 @@ Commit cycles will happen on any of the following conditions:
 <dependency>
     <groupId>com.hubrick.vertx</groupId>
     <artifactId>vertx-kafka-consumer</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 
