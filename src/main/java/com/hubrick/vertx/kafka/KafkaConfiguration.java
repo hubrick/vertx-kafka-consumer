@@ -28,6 +28,7 @@ class KafkaConfiguration {
     public static final String KEY_KAFKA_TOPIC = "kafkaTopic";
     public static final String KEY_VERTX_ADDRESS = "vertxAddress";
     public static final String KEY_ZOOKEEPER = "zk";
+    public static final String KEY_OFFSET_RESET = "offsetReset";
     public static final String KEY_ZOOKEPER_TIMEOUT_MS = "zookeperTimeout";
     public static final String KEY_MAX_UNACKNOWLEDGED = "maxUnacknowledged";
     public static final String KEY_MAX_UNCOMMITTED_OFFSETS = "maxUncommitted";
@@ -38,6 +39,7 @@ class KafkaConfiguration {
     private final String kafkaTopic;
     private final String vertxAddress;
     private final String zookeeper;
+    private final String offsetReset;
     private final int zookeeperTimeout;
     private final int maxUnacknowledged;
     private final long maxUncommitedOffsets;
@@ -48,6 +50,7 @@ class KafkaConfiguration {
                                final String kafkaTopic,
                                final String vertxTopic,
                                final String zookeeper,
+                               final String offsetReset,
                                final int zookeeperTimeout,
                                final int maxUnacknowledged,
                                final long maxUncommittedOffset,
@@ -57,6 +60,7 @@ class KafkaConfiguration {
         this.kafkaTopic = kafkaTopic;
         this.vertxAddress = vertxTopic;
         this.zookeeper = zookeeper;
+        this.offsetReset = offsetReset;
         this.zookeeperTimeout = zookeeperTimeout;
         this.maxUnacknowledged = maxUnacknowledged;
         this.maxUncommitedOffsets = maxUncommittedOffset;
@@ -68,6 +72,7 @@ class KafkaConfiguration {
                                             final String kafkaTopic,
                                             final String vertxTopic,
                                             final String zookeeper,
+                                            final String offsetReset,
                                             final int zookeeperTimeout,
                                             final int maxUnacknowledged,
                                             final long maxUncommittedOffsets,
@@ -77,6 +82,7 @@ class KafkaConfiguration {
                 kafkaTopic,
                 vertxTopic,
                 zookeeper,
+                offsetReset,
                 zookeeperTimeout,
                 maxUnacknowledged,
                 maxUncommittedOffsets,
@@ -98,6 +104,10 @@ class KafkaConfiguration {
 
     public String getZookeeper() {
         return zookeeper;
+    }
+
+    public String getOffsetReset() {
+        return offsetReset;
     }
 
     public int getZookeeperTimeout() {

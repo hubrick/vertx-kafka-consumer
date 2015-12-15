@@ -73,28 +73,20 @@ class VertxKafkaConsumer {
     }
 
     public static VertxKafkaConsumer create(final KafkaConfiguration configuration, final KafkaHandler handler) {
-        final Properties properties = createProperties(configuration.getZookeeper(),
-                configuration.getGroupId(),
-                configuration.getZookeeperTimeout());
-
+        final Properties properties = createProperties(configuration);
         final ConsumerConfig config = new ConsumerConfig(properties);
-
         final ConsumerConnector connector = Consumer.createJavaConsumerConnector(config);
-
-
         return new VertxKafkaConsumer(connector, configuration, handler);
     }
 
-    protected static Properties createProperties(final String zkHost,
-                                                 final String groupId,
-                                                 final int zookeeperTimeoutInMs) {
+    protected static Properties createProperties(KafkaConfiguration configuration) {
         final Properties properties = new Properties();
 
-        properties.setProperty("zookeeper.connect", zkHost);
-        properties.setProperty("group.id", groupId);
-        properties.setProperty("zookeeper.connection.timeout.ms", Integer.toString(zookeeperTimeoutInMs));
+        properties.setProperty("zookeeper.connect", configuration.getZookeeper());
+        properties.setProperty("group.id", configuration.getGroupId());
+        properties.setProperty("zookeeper.connection.timeout.ms", Integer.toString(configuration.getZookeeperTimeout()));
         properties.setProperty("auto.commit.enable", Boolean.FALSE.toString());
-        properties.setProperty("auto.offset.reset", "smallest");
+        properties.setProperty("auto.offset.reset", configuration.getOffsetReset());
         properties.setProperty("queued.max.message.chunks", "1000");
 
         return properties;
