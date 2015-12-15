@@ -42,6 +42,7 @@ public class KafkaMessageConsumer extends AbstractVerticle {
                 getMandatoryStringConfig(KafkaConfiguration.KEY_KAFKA_TOPIC),
                 getMandatoryStringConfig(KafkaConfiguration.KEY_VERTX_ADDRESS),
                 getMandatoryStringConfig(KafkaConfiguration.KEY_ZOOKEEPER),
+                config.getString(KafkaConfiguration.KEY_OFFSET_RESET, "largest"),
                 config.getInteger(KafkaConfiguration.KEY_ZOOKEPER_TIMEOUT_MS, DEFAULT_ZOOKEEPER_TIMEOUT_MS),
                 config.getInteger(KafkaConfiguration.KEY_MAX_UNACKNOWLEDGED, 100),
                 config.getLong(KafkaConfiguration.KEY_MAX_UNCOMMITTED_OFFSETS, 1000L),
