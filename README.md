@@ -42,7 +42,7 @@ Commit cycles will happen on any of the following conditions:
 <dependency>
     <groupId>com.hubrick.vertx</groupId>
     <artifactId>vertx-kafka-consumer</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
 </dependency>
 ```
 
@@ -55,6 +55,7 @@ Commit cycles will happen on any of the following conditions:
       "groupId" : "groupId",
       "kafkaTopic" : "kafka-topic",
       "vertxAddress" : "message-from-kafka",
+      "offsetReset" : "largest",
       "zk" : "host:port",
       "maxUnacknowledged" : 100,
       "maxUncommitted" : 1000,
@@ -65,6 +66,7 @@ Commit cycles will happen on any of the following conditions:
 * `groupId`: Kafka Group Id to use for the Kafka consumer
 * `kafkaTopic`: The Kafka topic to subscribe to
 * `vertxAddress`: Vert.x event bus address the Kafka messages are relayed to
+* `offsetReset`: What to do when there is no initial offset in ZooKeeper or if an offset is out of range
 * `zk`: Zookeeper host and port 
 * `maxUnacknowledged`: how many messages from Kafka can be unacknowledged before the module waits for all missing acknowledgements, effectively limiting the amount of messages that are on the Vertx Event Bus at any given time.
 * `maxUncommitted`: max offset difference before a commit cycle is run. A commit cycle waits for all unacknowledged messages and then commits the offset to Kafka. Note that when you read from multiple partitions the offset is not continuous and therefore every partition switch causes a commit cycle. For better performance you should start an instance of the module per partition.
